@@ -1,0 +1,11 @@
+{
+    "include": ["./**/*.ts", "./*.ts"],
+    "compilerOptions": {
+        "lib": ["ESNext"],
+        "target": "ESNext",
+        "module": "commonjs",
+        "alwaysStrict": true,
+		"skipLibCheck": true,
+        "esModuleInterop": true
+	},
+}
