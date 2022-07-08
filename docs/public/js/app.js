@@ -1,3 +1,7 @@
+document.getElementById('ctq').onclick = ()=>{
+    window.open("mailto:walavalkarridhesh@gmail.com")
+}
+
 document.getElementById('nav-toggle').addEventListener('click', () => {
     document.getElementById('nav-menu').classList.toggle('show')
 })
@@ -64,8 +68,8 @@ async function fetcher() {
         for (let i = 0; i < json.length; i++) {
             const e = json[i];
             if (e.name.startsWith('vercel')) return;
-            let r = await fetch(`https://placehold.co/600x400/000000/FFF?font=raleway&text=${e.name}`);
-            let blob = await r.blob();
+            let response = await fetch('/fetch/' + e.name);
+            let blob = await response.blob();
             createEl(e["html_url"], URL.createObjectURL(blob), e.description)
         }
     } catch (error) {
