@@ -1,3 +1,7 @@
+document.getElementById('ctq').onclick = ()=>{
+    window.open("mailto:walavalkarridhesh@gmail.com")
+}
+
 document.getElementById('nav-toggle').addEventListener('click', () => {
     document.getElementById('nav-menu').classList.toggle('show')
 })
