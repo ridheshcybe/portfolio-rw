@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cybemachine/portfolio-rw.git"
+    "url": "git+https://github.com/ridheshcybe/portfolio-rw.git"
   },
-  "author": "cybemachine <https://www.github.com/cybemachine>",
+  "author": "ridheshcybe <https://www.github.com/ridheshcybe>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cybemachine/portfolio-rw/issues"
+    "url": "https://github.com/ridheshcybe/portfolio-rw/issues"
   },
-  "homepage": "https://github.com/cybemachine/portfolio-rw#readme",
+  "homepage": "https://github.com/ridheshcybe/portfolio-rw#readme",
   "dependencies": {
     "axios": "^0.27.2",
     "cache": "^3.0.0",

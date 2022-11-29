@@ -62,7 +62,7 @@ function createEl(href, src, alt) {
 
 async function fetcher() {
     try {
-        let res = await fetch('https://api.github.com/users/cybemachine/repos')
+        let res = await fetch('https://api.github.com/users/ridheshcybe/repos')
         let json = await res.json();
 
         for (let i = 0; i < json.length; i++) {
