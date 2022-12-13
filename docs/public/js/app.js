@@ -67,7 +67,7 @@ async function fetcher() {
 
         for (let i = 0; i < json.length; i++) {
             const e = json[i];
-            if (e.name.startsWith('vercel')) return;
+            if(["ridheshcybe", "vercel-minify-web"].includes(e.name))return 
             let response = await fetch('https://placehold.co/600x400/000000/FFF?font=raleway&text=' + e.name);
             let blob = await response.blob();
             createEl(e["html_url"], URL.createObjectURL(blob), e.description)
