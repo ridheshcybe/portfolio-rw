@@ -1,4 +1,39 @@
-document.getElementById('ctq').onclick = ()=>{
+const Certificates = [{ orgUrl: "https://www.harvard.edu", orgName: "Harvard", path: "/public/img/CS50x.jpg", timeAdded: "7 July 2024" }];
+const CertificatesSize = [window.innerHeight / Certificates.length, window.innerWidth / Certificates.length];
+const gallery = document.getElementById("animated-thumbnails-gallery");
+Certificates.forEach((imageData, i) => {
+    // Create the caption element
+    const caption = document.createElement('div');
+    const dialog = document.createElement('dialog');
+    const p = document.createElement('p');
+    const img = document.createElement('img');
+    const btn = document.createElement('button');
+
+    btn.innerText = "X";
+    btn.classList.add("closeBtn")
+    img.src = location.protocol + "//" + location.host + "/" + imageData.path;
+    img.alt = imageData.orgName;
+    img.style.width = CertificatesSize[1];
+    img.style.height = CertificatesSize[0];
+    p.innerHTML = `<p>Received from: <a href="${imageData.orgUrl}"><strong>${imageData.orgName}</strong></a> - Added on ${imageData.timeAdded}</p>`;
+
+    img.onclick = () => {
+        dialog.showModal();
+    }
+    btn.onclick = () => {
+        dialog.close();
+    }
+
+    dialog.appendChild(btn);
+    dialog.appendChild(p);
+    caption.appendChild(dialog);
+    gallery.appendChild(img);
+    gallery.appendChild(caption);
+})
+
+
+
+document.getElementById('ctq').onclick = () => {
     window.open("mailto:walavalkarridhesh@gmail.com")
 }
 
@@ -67,7 +102,7 @@ async function fetcher() {
 
         for (let i = 0; i < json.length; i++) {
             const e = json[i];
-            if(["ridheshcybe", "vercel-minify-web"].includes(e.name))return 
+            if (["ridheshcybe", "vercel-minify-web"].includes(e.name)) return
             let response = await fetch('https://placehold.co/600x400/000000/FFF?font=raleway&text=' + e.name);
             let blob = await response.blob();
             createEl(e["html_url"], URL.createObjectURL(blob), e.description)
