@@ -80,7 +80,7 @@ sr.reveal('.skills__data, .work__img, .contact__input', { interval: 200 });
 
 const el = document.getElementById("grid");
 
-function createEl(href, src, alt) {
+function createEl(href, src, alt, archived) {
     const a = document.createElement("a");
 
     a.href = href;
@@ -90,6 +90,13 @@ function createEl(href, src, alt) {
 
     img.src = src;
     img.alt = alt;
+
+    if (archived) {
+        const p = document.createElement("p");
+        p.innerText = archived ? "Archived" : ""
+        p.classList.add("projectsp");
+        a.appendChild(p);
+    }
 
     a.appendChild(img);
     el.appendChild(a);
@@ -102,10 +109,12 @@ async function fetcher() {
 
         for (let i = 0; i < json.length; i++) {
             const e = json[i];
-            if (["ridheshcybe", "vercel-minify-web"].includes(e.name)) return
+            if (["ridheshcybe", "vercel-minify-web"].includes(e.name)) return;
+            const res = await fetch('https://api.github.com/repos/ridheshcybe/' + e.name);
+            const repo = await res.json();
             let response = await fetch('https://placehold.co/600x400/000000/FFF?font=raleway&text=' + e.name);
             let blob = await response.blob();
-            createEl(e["html_url"], URL.createObjectURL(blob), e.description)
+            createEl(e["html_url"], URL.createObjectURL(blob), e.description, repo.archived)
         }
     } catch (error) {
         el.innerHTML = `Error fetching ${err.message}`;

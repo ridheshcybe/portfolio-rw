@@ -564,3 +564,21 @@ img {
   right: 0;
   top: 10;
 }
+
+.work__img {
+  position: relative;
+  display: inline-block;
+}
+
+/* Position the "Archived" text */
+.projectsp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  background-color: goldenrod; /* Optional: background for better readability */
+  color: white;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+}
