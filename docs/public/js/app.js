@@ -1,4 +1,7 @@
-const Certificates = [{ orgUrl: "https://www.harvard.edu", orgName: "Harvard", path: "/public/img/CS50x.jpg", timeAdded: "7 July 2024" }];
+const Certificates = [
+    { orgUrl: "https://www.harvard.edu", orgName: "Harvard", path: "/public/img/CS50x.jpg", timeAdded: "7 July 2024" },
+    { orgUrl: "https://learn.opswatacademy.com/certifications/f904148a-9764-11ed-98f7-02dd896aace5", orgName: "opswatacademy", path: "/public/img/cip.jpg", timeAdded: "24 October 2024" }
+];
 const CertificatesSize = [window.innerHeight / Certificates.length, window.innerWidth / Certificates.length];
 const gallery = document.getElementById("animated-thumbnails-gallery");
 Certificates.forEach((imageData, i) => {
