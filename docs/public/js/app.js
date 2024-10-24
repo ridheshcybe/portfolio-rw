@@ -1,11 +1,12 @@
 const Certificates = [
     { orgUrl: "https://www.harvard.edu", orgName: "Harvard", path: "/public/img/CS50x.jpg", timeAdded: "7 July 2024" },
-    { orgUrl: "https://learn.opswatacademy.com/certifications/f904148a-9764-11ed-98f7-02dd896aace5", orgName: "opswatacademy", path: "/public/img/cip.png", timeAdded: "24 October 2024" }
+    { orgUrl: "https://learn.opswatacademy.com/certifications/f904148a-9764-11ed-98f7-02dd896aace5", orgName: "OpswatAcademy", path: "/public/img/cip.png", timeAdded: "24 October 2024" }
 ];
 const CertificatesSize = [window.innerHeight / Certificates.length, window.innerWidth / Certificates.length];
 const gallery = document.getElementById("animated-thumbnails-gallery");
 Certificates.forEach((imageData, i) => {
     // Create the caption element
+    const rootCert = document.createElement('div');
     const caption = document.createElement('div');
     const dialog = document.createElement('dialog');
     const p = document.createElement('p');
@@ -21,6 +22,7 @@ Certificates.forEach((imageData, i) => {
     p.innerHTML = `<p>Received from: <a href="${imageData.orgUrl}"><strong>${imageData.orgName}</strong></a> - Added on ${imageData.timeAdded}</p>`;
 
     img.onclick = () => {
+
         dialog.showModal();
     }
     btn.onclick = () => {
@@ -30,11 +32,28 @@ Certificates.forEach((imageData, i) => {
     dialog.appendChild(btn);
     dialog.appendChild(p);
     caption.appendChild(dialog);
-    gallery.appendChild(img);
-    gallery.appendChild(caption);
-})
+    rootCert.appendChild(img);
+    rootCert.appendChild(caption);
+    gallery.appendChild(rootCert);
+});
 
+const handleResize = () => {
+    const width = window.innerWidth;
+    let columns;
+    if (width < 768) {
+        columns = 1;
+    } else if (width < 1024) {
+        columns = 2;
+    } else {
+        columns = Certificates.length;
+    }
+    document.querySelector('.gallery-container').style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+}
 
+window.addEventListener('resize', handleResize);
+window.addEventListener('DOMContentLoaded', () => {
+    handleResize();
+});
 
 document.getElementById('ctq').onclick = () => {
     window.open("mailto:walavalkarridhesh@gmail.com")
@@ -50,7 +69,8 @@ document.querySelectorAll('.nav__link')
         navMenu.classList.remove('show')
     }))
 
-const sections = document.querySelectorAll('section[id]')
+const sections = document.querySelectorAll('section[id]');
+console.log(sections)
 
 window.addEventListener('scroll', () => {
     const scrollY = window.pageYOffset
@@ -61,9 +81,9 @@ window.addEventListener('scroll', () => {
         const sectionId = current.getAttribute('id')
 
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active')
+            document.querySelector('a[href*=' + sectionId + ']').classList.add('active')
         } else {
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active')
+            document.querySelector('a[href*=' + sectionId + ']').classList.remove('active')
         }
     })
 })

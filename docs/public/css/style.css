@@ -100,6 +100,25 @@ img {
   padding-bottom: 2rem;
 }
 
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.gallery-container > div {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-container > div > img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 /*===== LAYOUT =====*/
 .bd-grid {
   max-width: 1024px;
