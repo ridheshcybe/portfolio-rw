@@ -14,7 +14,6 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import { useState, useEffect } from "react";
 
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -268,32 +267,30 @@ const Home = () => {
                 Hi! I am Ridhesh W., a Web Developer based in Nepal.
               </p>
 
-              <a href="#projects">
-                <button
-                  className="relative inline-flex h-12 w-full md:w-60 md:mt-10 overflow-hidden rounded-lg p-[1px] focus:outline-none"
-                  onClick={() => {
-                    window.location.href = "#projects";
-                  }}
-                >
-                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+              <a
+                href="#projects"
+                className="relative inline-flex h-12 w-full md:w-60 md:mt-10 overflow-hidden rounded-lg p-[1px] focus:outline-none"
+              >
+                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
 
-                  <span
-                    className={`inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg
+                <span
+                  className={`inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg
              bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 `}
-                  >
-                    Show my work
-                    <FaLocationArrow />
-                  </span>
-                </button>
+                >
+                  Show my work
+                  <FaLocationArrow />
+                </span>
               </a>
             </div>
           </div>
         </div>
-        <img
-          className="w-full"
-          src="/bento.png"
-          alt="Your best option for a dev"
-        />
+        <a href="#projects">
+          <img
+            className="w-full"
+            src="/bento.png"
+            alt="Your best option for a dev"
+          />
+        </a>
         <div id="projects">
           <div className="py-20">
             <h1 className="heading">
@@ -302,76 +299,75 @@ const Home = () => {
             </h1>
             <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
               {projects.map((item) => (
-                <div
-                  className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]"
-                  key={item.id}
-                >
-                  <PinContainer title={item.link} href={item.link}>
-                    <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
-                      <div
-                        className="relative w-full h-full overflow-hidden lg:rounded-3xl"
-                        style={{ backgroundColor: "#13162D" }}
-                      >
+                <a href={item.link} target={"_blank"} key={item.id}>
+                  <div className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]">
+                    <PinContainer title={item.link} href={item.link}>
+                      <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
+                        <div
+                          className="relative w-full h-full overflow-hidden lg:rounded-3xl"
+                          style={{ backgroundColor: "#13162D" }}
+                        >
+                          <Image
+                            src="/bg.png"
+                            width={1080}
+                            height={1920}
+                            alt="bgimg"
+                          />
+                        </div>
                         <Image
-                          src="/bg.png"
+                          src={item.img}
+                          alt="cover"
                           width={1080}
                           height={1920}
-                          alt="bgimg"
+                          className="z-10 absolute bottom-0"
                         />
                       </div>
-                      <Image
-                        src={item.img}
-                        alt="cover"
-                        width={1080}
-                        height={1920}
-                        className="z-10 absolute bottom-0"
-                      />
-                    </div>
 
-                    <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
-                      {item.title}
-                    </h1>
+                      <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
+                        {item.title}
+                      </h1>
 
-                    <p
-                      className="lg:text-xl lg:font-normal font-light text-sm line-clamp-2"
-                      style={{
-                        color: "#BEC1DD",
-                        margin: "1vh 0",
-                      }}
-                    >
-                      {item.des}
-                    </p>
+                      <p
+                        className="lg:text-xl lg:font-normal font-light text-sm line-clamp-2"
+                        style={{
+                          color: "#BEC1DD",
+                          margin: "1vh 0",
+                        }}
+                      >
+                        {item.des}
+                      </p>
 
-                    <div className="flex items-center justify-between mt-7 mb-3">
-                      <div className="flex items-center">
-                        {item.iconLists.map((icon, index) => (
-                          <div
-                            key={index}
-                            className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
-                            style={{
-                              transform: `translateX(-${5 * index + 2}px)`,
-                            }}
-                          >
-                            <Image
-                              width={1080}
-                              height={1920}
-                              src={icon}
-                              alt="icon5"
-                              className="p-2"
-                            />
-                          </div>
-                        ))}
+                      <div className="flex items-center justify-between mt-7 mb-3">
+                        <div className="flex items-center">
+                          {item.iconLists.map((icon, index) => (
+                            <div
+                              key={index}
+                              className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
+                              style={{
+                                transform: `translateX(-${5 * index + 2}px)`,
+                              }}
+                            >
+                              <Image
+                                width={1080}
+                                height={1920}
+                                src={icon}
+                                alt="icon5"
+                                className="p-2"
+                              />
+                            </div>
+                          ))}
+                        </div>
+
+                        <div className="flex justify-center items-center">
+                          <p className="flex lg:text-xl md:text-xs text-sm text-purple">
+                            Check Live Site
+                          </p>
+                          <FaLocationArrow className="ms-3" color="#CBACF9" />
+                        </div>
                       </div>
-
-                      <div className="flex justify-center items-center">
-                        <p className="flex lg:text-xl md:text-xs text-sm text-purple">
-                          Check Live Site
-                        </p>
-                        <FaLocationArrow className="ms-3" color="#CBACF9" />
-                      </div>
-                    </div>
-                  </PinContainer>
-                </div>
+                    </PinContainer>
+                  </div>
+                </a>
               ))}
             </div>
           </div>
