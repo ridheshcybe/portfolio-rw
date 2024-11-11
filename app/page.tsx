@@ -19,11 +19,11 @@ import { useState, useEffect } from "react";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export function cn(...inputs: ClassValue[]) {
+function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const FloatingNav = ({
+const FloatingNav = ({
   navItems,
   className,
 }: {
@@ -157,7 +157,7 @@ type SpotlightProps = {
   fill?: string;
 };
 
-export const Spotlight = ({ className, fill }: SpotlightProps) => {
+const Spotlight = ({ className, fill }: SpotlightProps) => {
   return (
     <svg
       className={cn(
@@ -206,7 +206,7 @@ export const Spotlight = ({ className, fill }: SpotlightProps) => {
   );
 };
 
-export const Icon = ({ className, ...rest }: any) => {
+const Icon = ({ className, ...rest }: any) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
