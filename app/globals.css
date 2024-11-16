@@ -88,3 +88,23 @@
     @apply font-bold text-4xl md:text-5xl text-center;
   }
 }
+
+.center {
+  place-items: center;
+}
+
+.center > div {
+  margin-bottom: 5vh;
+  border-radius: 1.5%;
+  background-color: white;
+  border: 1px solid white;
+  text-align: center;
+}
+
+.center > div > a {
+  color: black;
+}
+
+.center > div > a > img {
+  border-radius: 1.5%;
+}

@@ -1,11 +1,12 @@
 "use client";
-
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Card } from "@/data";
+import dotenv from "dotenv";
 import { PinContainer } from "./ui/pin";
 import { FaLocationArrow } from "react-icons/fa6";
-import { navItems, socialMedia, projects } from "@/data";
+import { navItems, socialMedia, certificates } from "@/data";
 import {
   motion,
   stagger,
@@ -17,6 +18,13 @@ import {
 
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { Octokit } from "@octokit/rest";
+
+dotenv.config();
+// unauthenticated client
+const octokit = new Octokit({
+  auth: process.env.GITHUB_TOKEN,
+});
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -54,44 +62,46 @@ const FloatingNav = ({
   });
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        initial={{
-          opacity: 1,
-          y: -100,
-        }}
-        animate={{
-          y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0,
-        }}
-        transition={{
-          duration: 0.2,
-        }}
-        className={cn(
-          "flex max-w-fit md:min-w-[70vw] lg:min-w-fit fixed z-[5000] top-10 inset-x-0 mx-auto px-10 py-5 rounded-lg border border-black/.1 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] items-center justify-center space-x-4",
-          className
-        )}
-        style={{
-          backdropFilter: "blur(16px) saturate(180%)",
-          backgroundColor: "rgba(17, 25, 40, 0.75)",
-          borderRadius: "12px",
-          border: "1px solid rgba(255, 255, 255, 0.125)",
-        }}
-      >
-        {navItems.map((navItem: any, idx: number) => (
-          <Link
-            key={`link=${idx}`}
-            href={navItem.link}
-            className={cn(
-              "relative dark:text-neutral-50 items-center  flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
-            )}
-          >
-            <span className="block sm:hidden">{navItem.icon}</span>
-            <span className=" text-sm !cursor-pointer">{navItem.name}</span>
-          </Link>
-        ))}
-      </motion.div>
-    </AnimatePresence>
+    <div className="main">
+      <AnimatePresence mode="wait">
+        <motion.div
+          initial={{
+            opacity: 1,
+            y: -100,
+          }}
+          animate={{
+            y: visible ? 0 : -100,
+            opacity: visible ? 1 : 0,
+          }}
+          transition={{
+            duration: 0.2,
+          }}
+          className={cn(
+            "flex max-w-fit md:min-w-[70vw] lg:min-w-fit fixed z-[5000] top-10 inset-x-0 mx-auto px-10 py-5 rounded-lg border border-black/.1 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] items-center justify-center space-x-4",
+            className
+          )}
+          style={{
+            backdropFilter: "blur(16px) saturate(180%)",
+            backgroundColor: "rgba(17, 25, 40, 0.75)",
+            borderRadius: "12px",
+            border: "1px solid rgba(255, 255, 255, 0.125)",
+          }}
+        >
+          {navItems.map((navItem: any, idx: number) => (
+            <Link
+              key={`link=${idx}`}
+              href={navItem.link}
+              className={cn(
+                "relative dark:text-neutral-50 items-center  flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+              )}
+            >
+              <span className="block sm:hidden">{navItem.icon}</span>
+              <span className=" text-sm !cursor-pointer">{navItem.name}</span>
+            </Link>
+          ))}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 };
 
@@ -205,23 +215,80 @@ const Spotlight = ({ className, fill }: SpotlightProps) => {
   );
 };
 
-const Icon = ({ className, ...rest }: any) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      className={className}
-      {...rest}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m6-6H6" />
-    </svg>
-  );
+//@ts-ignore
+const AddGrid = ({ cert }) => {
+  const newarr: Card[][] = [];
+  for (let i = 0; i < cert.length; i += 2) {
+    cert[i].key = Math.random();
+    cert[i + 1].key = Math.random();
+    newarr.push([cert[i], cert[i + 1]]);
+  }
+  return newarr.map((f, i) => (
+    <div className="center">
+      <div key={Math.random()}>
+        <a href={f[0].orgUrl} target="_blank">
+          <img
+            src={f[0].path}
+            alt={f[0].orgName}
+            style={{ width: 50 + "vw", height: "auto" }}
+          />
+          {f[0].orgName} - Added {f[0].timeAdded}
+        </a>
+      </div>
+      <div key={Math.random()}>
+        <a href={f[1].orgUrl} target="_blank">
+          <img
+            src={f[1].path}
+            alt={f[1].orgName}
+            style={{ width: 50 + "vw", height: "auto" }}
+          />
+          {f[1].orgName} - Added {f[1].timeAdded}
+        </a>
+      </div>
+    </div>
+  ));
 };
 
 const Home = () => {
+  const [files, setFiles] = React.useState<
+    Array<{
+      name: string;
+      archived: boolean;
+      url: string;
+      description: string;
+    }>
+  >([]);
+
+  React.useEffect(() => {
+    async function getFiles() {
+      octokit.rest.repos
+        .listForUser({ username: "ridheshcybe" })
+        .then(({ data }) => {
+          const newarr = [];
+          for (let i = 0; i < data.length; i++) {
+            const repo = data[i];
+            newarr.push({
+              name: repo.name,
+              archived: repo.archived || false,
+              url: repo.html_url,
+              description: repo.description || "[NO_DESCRIPTION]",
+            });
+          }
+          setFiles(newarr);
+        })
+        .catch((err) => {
+          console.error("Error fetching repositories:", err);
+        });
+      // Update state with the fetched projects
+      //@ts-ignore
+    }
+
+    // Fetch files only if the `files` state is empty
+    if (files.length === 0) {
+      getFiles();
+    }
+  }, [files]); // This effect runs when `files` is empty (on mount or when `files` is reset)
+
   return (
     <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
       <div className="max-w-7xl w-full">
@@ -284,6 +351,14 @@ const Home = () => {
             </div>
           </div>
         </div>
+
+        <h1 className="heading" id="cert">
+          A small selection of{" "}
+          <span className="text-purple">Verified Certificates</span>
+        </h1>
+        <br></br>
+        <AddGrid cert={certificates}></AddGrid>
+
         <a href="#projects">
           <img
             className="w-full"
@@ -298,10 +373,10 @@ const Home = () => {
               <span className="text-purple">recent projects</span>
             </h1>
             <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
-              {projects.map((item) => (
-                <a href={item.link} target={"_blank"} key={item.id}>
+              {files.map((item, i) => (
+                <a href={item.url} target={"_blank"} key={i}>
                   <div className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]">
-                    <PinContainer title={item.link} href={item.link}>
+                    <PinContainer title={item.url} href={item.url}>
                       <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
                         <div
                           className="relative w-full h-full overflow-hidden lg:rounded-3xl"
@@ -314,17 +389,10 @@ const Home = () => {
                             alt="bgimg"
                           />
                         </div>
-                        <Image
-                          src={item.img}
-                          alt="cover"
-                          width={1080}
-                          height={1920}
-                          className="z-10 absolute bottom-0"
-                        />
                       </div>
 
                       <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
-                        {item.title}
+                        {item.name}
                       </h1>
 
                       <p
@@ -334,28 +402,19 @@ const Home = () => {
                           margin: "1vh 0",
                         }}
                       >
-                        {item.des}
+                        {item.description}
                       </p>
 
                       <div className="flex items-center justify-between mt-7 mb-3">
-                        <div className="flex items-center">
-                          {item.iconLists.map((icon, index) => (
+                        <div className="flex items-center" id="here">
+                          {item.archived == true && (
                             <div
-                              key={index}
+                              key={i + "inner"}
                               className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
-                              style={{
-                                transform: `translateX(-${5 * index + 2}px)`,
-                              }}
                             >
-                              <Image
-                                width={1080}
-                                height={1920}
-                                src={icon}
-                                alt="icon5"
-                                className="p-2"
-                              />
+                              Archived
                             </div>
-                          ))}
+                          )}
                         </div>
 
                         <div className="flex justify-center items-center">

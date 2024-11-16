@@ -1,26 +1,37 @@
 export const navItems = [
+  { name: "Home", link: "#main" },
+  { name: 'Certificates', link: '#cert' },
   { name: "Projects", link: "#projects" },
   { name: "Contact", link: "#contact" },
 ];
 
-export const projects = [
+export type Card = {
+  id: number;
+  orgUrl: string;
+  orgName: string;
+  path: string;
+  timeAdded: string;
+  size: number;
+};
+
+export const certificates: Card[] = [
   {
-    id: 1,
-    title: "Encrypte: A crypto tool",
-    des: "A crypto toolused to encrypt and decrypt strings",
-    img: "/6325.png",
-    iconLists: ["/js.svg", "/ts.svg"],
-    link: 'https://github.com/ridheshcybe/encrypte',
+    id: 0,
+    orgUrl: "https://www.harvard.edu", orgName: "Harvard",
+    path: "/cert/cs50.jpg", timeAdded: "7 July 2024",
+    size: 0
   },
   {
-    id: 2,
-    title: "Portfolio-rw",
-    des: "Portfolio app",
-    img: "/port.png",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg"],
-    link: "https://github.com/ridheshcybe/portfolio-rw",
-  }
-];
+    id: 1,
+    orgUrl: "https://learn.opswatacademy.com/certifications/f904148a-9764-11ed-98f7-02dd896aace5",
+    orgName: "opswatacademy", path: "/cert/cip.png",
+    timeAdded: "24 October 2024",
+    size: 0
+  },
+].map((e, i) => {
+  e.id = i;
+  return e;
+})
 
 export const socialMedia = [
   {
