@@ -20,15 +20,15 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Octokit } from "@octokit/rest";
 
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
 dotenv.config();
 // unauthenticated client
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
-
-function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
 
 const FloatingNav = ({
   navItems,
