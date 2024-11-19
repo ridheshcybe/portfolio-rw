@@ -406,16 +406,11 @@ const Home = () => {
                       </p>
 
                       <div className="flex items-center justify-between mt-7 mb-3">
-                        <div className="flex items-center" id="here">
-                          {item.archived == true && (
-                            <div
-                              key={i + "inner"}
-                              className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
-                            >
-                              Archived
-                            </div>
-                          )}
-                        </div>
+                        {item.archived == true && (
+                          <div className="flex items-center badge">
+                            Archived
+                          </div>
+                        )}
 
                         <div className="flex justify-center items-center">
                           <p className="flex lg:text-xl md:text-xs text-sm text-purple">
