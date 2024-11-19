@@ -383,7 +383,7 @@ const Home = () => {
                           style={{ backgroundColor: "#13162D" }}
                         >
                           <Image
-                            src="/bg.png"
+                            src={`https://placehold.co/500x400/png?text=${item.name}`}
                             width={1080}
                             height={1920}
                             alt="bgimg"
