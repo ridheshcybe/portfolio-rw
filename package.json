@@ -22,11 +22,13 @@
     "next": "14.2.10",
     "next-themes": "^0.3.0",
     "node-cache": "^5.1.2",
+    "path-to-regexp": "^6.3.0",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.0.1",
     "react-loading": "^2.0.3",
     "react-lottie": "^1.2.4",
+    "semver": "^7.5.2",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
     "vercel": "^34.0.0"
