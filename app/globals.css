@@ -122,3 +122,14 @@
 .center > div > a > img {
   border-radius: 1.5%;
 }
+
+.gridCERT {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+  grid-gap: 2rem;
+  margin-block: 2rem;
+  padding: 0 1rem;
+  justify-items: center;
+  text-align: center;
+  align-items: center;
+}

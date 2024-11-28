@@ -1,6 +1,6 @@
 export const navItems = [
   { name: "Home", link: "#main" },
-  { name: 'Certificates', link: '#cert' },
+  { name: 'Certificates', link: '/cert' },
   { name: "Projects", link: "#projects" },
   { name: "Contact", link: "#contact" },
 ];
