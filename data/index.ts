@@ -28,6 +28,12 @@ export const certificates: Card[] = [
     timeAdded: "24 October 2024",
     size: 0
   },
+  {
+    id: 3,
+    orgUrl: "https://moonshot.scaler.com/s/sl/UJmWATrlng",
+    orgName: "Scaler",
+    path: "/cert/s",
+    timeAdded: "28 November 2024"
 ].map((e, i) => {
   e.id = i;
   return e;
