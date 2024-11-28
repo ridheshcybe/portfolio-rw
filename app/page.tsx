@@ -217,32 +217,17 @@ const Spotlight = ({ className, fill }: SpotlightProps) => {
 
 //@ts-ignore
 const AddGrid = ({ cert }) => {
-  const newarr: Card[][] = [];
-  for (let i = 0; i < cert.length; i += 2) {
-    cert[i].key = Math.random();
-    cert[i + 1].key = Math.random();
-    newarr.push([cert[i], cert[i + 1]]);
-  }
-  return newarr.map((f, i) => (
+  //@ts-ignore
+  return cert.map((f, i) => (
     <div className="center">
       <div key={Math.random()}>
-        <a href={f[0].orgUrl} target="_blank">
+        <a href={f.orgUrl} target="_blank">
           <img
-            src={f[0].path}
-            alt={f[0].orgName}
+            src={f.path}
+            alt={f.orgName}
             style={{ width: 50 + "vw", height: "auto" }}
           />
-          {f[0].orgName} - Added {f[0].timeAdded}
-        </a>
-      </div>
-      <div key={Math.random()}>
-        <a href={f[1].orgUrl} target="_blank">
-          <img
-            src={f[1].path}
-            alt={f[1].orgName}
-            style={{ width: 50 + "vw", height: "auto" }}
-          />
-          {f[1].orgName} - Added {f[1].timeAdded}
+          {f.orgName} - Added {f.timeAdded}
         </a>
       </div>
     </div>

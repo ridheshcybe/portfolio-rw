@@ -19,26 +19,24 @@ export const certificates: Card[] = [
     id: 0,
     orgUrl: "https://www.harvard.edu", orgName: "Harvard",
     path: "/cert/cs50.jpg", timeAdded: "7 July 2024",
-    size: 0
+    size: 0,
   },
   {
     id: 1,
     orgUrl: "https://learn.opswatacademy.com/certifications/f904148a-9764-11ed-98f7-02dd896aace5",
     orgName: "opswatacademy", path: "/cert/cip.png",
     timeAdded: "24 October 2024",
-    size: 0
+    size: 0,
   },
   {
     id: 3,
     orgUrl: "https://moonshot.scaler.com/s/sl/UJmWATrlng",
     orgName: "Scaler",
     path: "/cert/s.png",
-    timeAdded: "28 November 2024"
+    timeAdded: "28 November 2024",
+    size: 0,
   }
-].map((e, i) => {
-  e.id = i;
-  return e;
-})
+]
 
 export const socialMedia = [
   {
