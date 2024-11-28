@@ -34,6 +34,7 @@ export const certificates: Card[] = [
     orgName: "Scaler",
     path: "/cert/s.png",
     timeAdded: "28 November 2024"
+  }
 ].map((e, i) => {
   e.id = i;
   return e;
