@@ -20,9 +20,14 @@ export const certificates: Card[] = [
     orgUrl: "https://www.harvard.edu", orgName: "Harvard",
     path: "/cert/cs50.jpg", timeAdded: "7 July 2024",
     size: 0,
+  },{
+    id: 1,
+    orgUrl: "https://www.harvard.edu", orgName: "Harvard",
+    path: "/cert/CS50P.png", timeAdded: "18 Jan 2025",
+    size: 0,
   },
   {
-    id: 1,
+    id: 2,
     orgUrl: "https://learn.opswatacademy.com/certifications/f904148a-9764-11ed-98f7-02dd896aace5",
     orgName: "opswatacademy", path: "/cert/cip.png",
     timeAdded: "24 October 2024",
