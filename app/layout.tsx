@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="e-SflZVkj7pQaVOdB6emGG30JbzNvMS99HMaltY271o" />
         <link rel="icon" href="/profile.svg" sizes="any" />
       </head>
       <body className={inter.className}>
